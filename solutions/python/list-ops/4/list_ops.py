@@ -1,0 +1,47 @@
+def append(xs, ys):
+    return xs + ys
+
+
+def concat(lists):
+    result = []
+
+    for l in lists:
+        result += l
+
+    return result
+
+
+def filter_clone(function, xs):
+    return [x for x in xs if function(x)]
+
+
+def length(xs):
+    if xs:
+        return 1 + length(xs[1:])
+    else:
+        return 0
+
+
+def map_clone(function, xs):
+    return [function(x) for x in xs]
+
+
+def foldl(function, xs, acc):
+    for x in xs:
+        acc = function(acc, x)
+
+    return acc
+
+
+def foldr(function, xs, acc):
+    if xs:
+        return foldr(function, xs[:-1], function(xs[-1], acc))
+    else:
+        return acc
+
+
+def reverse(xs):
+    if len(xs) <= 1:
+        return xs
+    else:
+        return append([xs[-1]], reverse(xs[:-1]))
