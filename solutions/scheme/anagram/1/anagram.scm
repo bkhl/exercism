@@ -1,0 +1,15 @@
+(import (rnrs))
+
+(define (anagram target words)
+  (let ((normalized-target (normalize target))
+        (downcased-target (string-downcase target)))
+    (filter (λ (word)
+              (and  (string=? (normalize word)
+                              normalized-target)
+                    (not (string=? (string-downcase word)
+                                   downcased-target))))
+            words)))
+
+(define (normalize word)
+  (list->string (sort (string->list (string-downcase word))
+                      char<?)))
