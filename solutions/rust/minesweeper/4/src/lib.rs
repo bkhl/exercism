@@ -1,0 +1,42 @@
+use std::char::from_digit;
+
+/// Given an array of string slices representing a Minesweeper map, return a
+/// vector of strings, with the mines marked out, and empty squares marked with
+/// a digit indicating the number of adjacent mines.
+pub fn annotate(minefield: &[&str]) -> Vec<String> {
+    (0..minefield.len())
+        .map(|y| {
+            (0..minefield[y].len())
+                .map(|x| annotate_square(x, y, minefield))
+                .collect()
+        })
+        .collect()
+}
+
+// Get the annotation for a square with the given coordinates.
+fn annotate_square(x: usize, y: usize, minefield: &[&str]) -> char {
+    match &minefield[y].chars().nth(x).unwrap() {
+        '*' => '*',
+        ' ' => match count_adjacent_mines(x, y, minefield) {
+            0 => ' ',
+            n => from_digit(n as u32, 10).unwrap(),
+        },
+        _ => unreachable!(),
+    }
+}
+
+// Count the number of adjacent mines for a square with the given coordinates.
+fn count_adjacent_mines(x: usize, y: usize, minefield: &[&str]) -> usize {
+    minefield
+        .iter()
+        .skip(if y == 0 { 0 } else { y - 1 })
+        .take(if y == 0 { 2 } else { 3 })
+        .map(|row| {
+            row.chars()
+                .skip(if x == 0 { 0 } else { x - 1 })
+                .take(if x == 0 { 2 } else { 3 })
+                .filter(|c| *c == '*')
+                .count()
+        })
+        .sum()
+}
