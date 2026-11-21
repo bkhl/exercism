@@ -1,0 +1,13 @@
+[
+  {
+    "label": "test",
+    "command": "/usr/bin/toolbox",
+    "args": ["run", "make", "test"],
+    "shell": "system",
+  },
+  {
+    "label": "memcheck",
+    "command": "/usr/bin/toolbox",
+    "args": ["run", "make", "memcheck"],
+  },
+]

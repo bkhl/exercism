@@ -1,0 +1,31 @@
+{
+  "file_types": {
+    "C": ["c", "h"],
+  },
+  "languages": {
+    "C": {
+      "enable_language_server": true,
+      "language_servers": ["clangd"],
+      "formatter": {
+        "language_server": { "name": "clangd" },
+      },
+      "format_on_save": "on",
+      "tab_size": 2,
+      "hard_tabs": false,
+    },
+  },
+  "lsp": {
+    "clangd": {
+      "binary": {
+        "path": "/usr/bin/toolbox",
+        "arguments": ["run", "/usr/bin/clangd"],
+      },
+    },
+  },
+  "dap": {
+    "GDB": {
+      "binary": "/usr/bin/toolbox",
+      "args": ["run", "gdb", "-i=dap"],
+    },
+  },
+}

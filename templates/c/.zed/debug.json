@@ -1,0 +1,14 @@
+[
+  {
+    "label": "Debug tests",
+    "build": {
+      "command": "toolbox",
+      "args": ["run", "make", "tests.out"],
+      "cwd": "$ZED_WORKTREE_ROOT",
+    },
+    "program": "$ZED_WORKTREE_ROOT/tests.out",
+    "cwd": "$ZED_WORKTREE_ROOT",
+    "request": "launch",
+    "adapter": "GDB",
+  },
+]
